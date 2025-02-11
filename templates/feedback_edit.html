@@ -1,0 +1,21 @@
+{% extends 'flatpages/default.html' %}
+<!--{% load i18n %}-->
+
+<!--{% load tz %}-->
+
+
+<!-- Название у нас будет news -->
+{% block title %}
+Feedback edit
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<!--     {% get_current_timezone as TIME_ZONE %}-->
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Save" />
+</form>
+{% endblock content %}

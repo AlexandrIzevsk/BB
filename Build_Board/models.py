@@ -50,8 +50,14 @@ class Advert(models.Model):
 
 
 class Feedback(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    # customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     advert = models.ForeignKey(Advert, on_delete=models.CASCADE)
     time_in = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     accept = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.text()}'
+
+    def get_absolute_url(self):
+        return reverse('advert_detail', args=[str(self.advert_id)])

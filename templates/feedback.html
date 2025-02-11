@@ -1,0 +1,27 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Feedbacks customer
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+
+
+    <h1>"All feedbacks customer" ({{ feedbacks|length }})</h1>
+
+    {% for single_feedback in feedbacks %}
+        <hr>
+        <a href="{{ link }}{{ single_feedback.get_absolute_url }}"><h2>{{ single_feedback.advert.title }}</h2></a>
+        <h6>{{ single_feedback.time_in|date:'d M Y' }}</h6>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>"Принять отклик?"</p>
+        <button><a href="{% url 'feedback_update' %}">Принять</a></button>
+    </form>
+
+    {% endfor %}
+
+
+{% endblock content %}

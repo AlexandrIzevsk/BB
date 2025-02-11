@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from Build_Board.views import FeedbackCreate, FeedbackCustomer, FeedbackUpdate
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,7 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('adverts/', include('Build_Board.urls')),
+    path('feedback', FeedbackCreate.as_view(), name='feedback_edit'),
+    path('feedbackList/', FeedbackCustomer.as_view(), name='feedback_customer'),
+    path('feedbackUpdate/', FeedbackUpdate.as_view(), name='feedback_update'),
 ]

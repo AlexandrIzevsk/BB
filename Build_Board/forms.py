@@ -1,6 +1,9 @@
+from django.contrib.sessions.models import Session
 from django import forms
-from tinymce import TinyMCE
-from .models import Advert
+# from tinymce import TinyMCE
+from django.contrib.auth.models import User
+from tinymce.widgets import TinyMCE
+from .models import Advert, Customer, Feedback
 
 
 class TinyMCEWidget(TinyMCE):
@@ -16,6 +19,28 @@ class PostForm(forms.ModelForm):
 	)
 	class Meta:
 		model = Advert
-		fields = '__all__'
+		fields = [
+            'choice',
+            'title',
+            'content',
+        ]
+
+class FeedbackForm(forms.ModelForm):
+
+	class Meta:
+		model = Feedback
+		fields = [
+			'advert',
+            'text',
+        ]
 
 
+class FeedbackUpdateForm(forms.ModelForm):
+	accept = True
+	class Meta:
+		model = Feedback
+		fields = [
+			'advert',
+            'text',
+			'accept',
+        ]
