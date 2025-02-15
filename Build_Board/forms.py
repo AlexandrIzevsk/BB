@@ -3,7 +3,7 @@ from django import forms
 # from tinymce import TinyMCE
 from django.contrib.auth.models import User
 from tinymce.widgets import TinyMCE
-from .models import Advert, Customer, Feedback
+from .models import Advert, Feedback #Customer,
 
 
 class TinyMCEWidget(TinyMCE):

@@ -16,17 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Build_Board.views import FeedbackCreate, FeedbackCustomer, FeedbackUpdate
+from Build_Board.views import FeedbackCreate, ProfillUser
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    # path('accounts/', include('allauth.urls')),
+    path('profile_user/', ProfillUser.as_view(), name='profil_user'),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('adverts/', include('Build_Board.urls')),
     path('feedback', FeedbackCreate.as_view(), name='feedback_edit'),
-    path('feedbackList/', FeedbackCustomer.as_view(), name='feedback_customer'),
-    path('feedbackUpdate/', FeedbackUpdate.as_view(), name='feedback_update'),
 ]

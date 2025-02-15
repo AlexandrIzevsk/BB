@@ -3,6 +3,6 @@ from .models import  *
 
 
 # Register your models here.
-admin.site.register(Customer)
+# admin.site.register(Customer)
 admin.site.register(Advert)
 admin.site.register(Feedback)

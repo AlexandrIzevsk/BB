@@ -3,9 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
-# Create your models here.
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='users')
 
 
 class Advert(models.Model):
@@ -33,7 +30,7 @@ class Advert(models.Model):
         (spellmasters, 'Мастера заклинаний')
     ]
 
-    author = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.CharField(max_length=2, choices=CHOICES, default=tanks)
     time_in = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=128)
@@ -50,7 +47,7 @@ class Advert(models.Model):
 
 
 class Feedback(models.Model):
-    # customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     advert = models.ForeignKey(Advert, on_delete=models.CASCADE)
     time_in = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
