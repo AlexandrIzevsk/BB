@@ -45,10 +45,16 @@ feedbacks
            {% endif %}
        {% endcache %}
    {% endif %}
-
-    {% for single_feedback in feedbacks_user %}
-        <hr>
-        <h3>{{ single_feedback.text }}</h3>
+    <hr>
+    {% for feed in feedbacks_user %}
+    <p><h3>{{ feed.text }}</h3>
+        {% if not feed.accept %}
+        <button><a href="{% url 'feedback_confirm' feed.id %}">Принять отклик</a> </button>
+        <button><a href="{% url 'feedback_delete' feed.id %}">Отклонить отклик</a> </button>
+        {% else %}
+        Отклик принят
+        {% endif %}
+    </p>
     {% endfor %}
 
 {% endblock content %}

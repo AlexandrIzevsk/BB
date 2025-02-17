@@ -63,6 +63,13 @@ class FeedbackCreate(CreateView):
     def form_valid(self, form):
         feedback = form.save(commit=False)
         feedback.user = self.request.user
+        send_mail(
+            subject='Отклик на объявление',
+            message=f'Пользователь {feedback.user.username} оставил отклик на объявление {feedback.advert.title}',
+            from_email=None,
+            recipient_list=[feedback.advert.author.email],
+        )
+
         return super().form_valid(form)
 
 
@@ -78,8 +85,13 @@ def feedback_confirm(request, pk):
     )
     return redirect(request.META['HTTP_REFERER']) # Перенаправляет на туже самую страницу с которой был запрос
 
+def feedback_delete(request, pk):
+    feed = Feedback.objects.get(pk=pk)
+    feed.delete()
+    return redirect(request.META['HTTP_REFERER']) # Перенаправляет на туже самую страницу с которой был запрос
+
+
 class ProfillUser(ListView):
-    # queryset = Feedback.objects.filter(advert__author=user)
     template_name = 'profil_user.html'
     context_object_name = 'feedbacks_user'
     paginate_by = 2
@@ -87,7 +99,7 @@ class ProfillUser(ListView):
     def get_queryset(self):
         user = self.request.user
         queryset = Feedback.objects.filter(advert__author=user)
-        self.filterset = FeedbackFilter(self.request.GET, queryset)
+        self.filterset = FeedbackFilter(self.request.GET, queryset, request=user)
         return self.filterset.qs
 
     # Переопределяем функцию получения списка товаров
@@ -95,20 +107,3 @@ class ProfillUser(ListView):
         context = super().get_context_data(**kwargs)
         context['filterset'] = self.filterset
         return context
-
-#
-#     template_name = 'feedback.html'
-#     context_object_name = 'feedbacks'
-#     paginate_by = 10
-#
-#     def form_valid(self, form):
-#         feedback = form.save(commit=False)
-#         feedback.accept = True
-#         return super().form_valid(form)
-#
-#     def get_queryset(self):
-#         # Получаем обычный запрос
-#         user = self.request.user
-#         return Feedback.objects.filter(advert__author=user)
-
-

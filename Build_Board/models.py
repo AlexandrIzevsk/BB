@@ -37,7 +37,7 @@ class Advert(models.Model):
     content = HTMLField()
 
     def __str__(self):
-        return f'{self.title} - {self.preview()}'
+        return self.title
 
     def preview(self):
         return self.content[0:123] + '...'
@@ -54,7 +54,7 @@ class Feedback(models.Model):
     accept = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.text()}'
+        return self.text
 
     def get_absolute_url(self):
         return reverse('advert_detail', args=[str(self.advert_id)])

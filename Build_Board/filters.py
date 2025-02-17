@@ -1,17 +1,15 @@
 from django_filters import FilterSet, DateTimeFilter, ModelChoiceFilter
-from .models import Advert
+from .models import Feedback, Advert
 
 
 class FeedbackFilter(FilterSet):
-    category = ModelChoiceFilter(
-        field_name='advert__title',
-        queryset=Advert.objects.all(),
-        label='Advert',
-        empty_label='Любая',
-    )
+
+    def __init__(self, *args, **kwargs):
+        super(FeedbackFilter, self).__init__(*args, **kwargs)
+        self.filters['advert'].queryset = Advert.objects.filter(author=kwargs['request'])
 
     class Meta:
-        model = Advert
+        model = Feedback
         fields = {
-            'title',
+            'advert',
         }
