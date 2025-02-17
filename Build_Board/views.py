@@ -60,17 +60,10 @@ class FeedbackCreate(CreateView):
     form_class = FeedbackForm
     template_name = 'feedback_edit.html'
 
-    # def form_valid(self, form):
-    #     feedback = form.save(commit=False)
-    #     feedback.user = self.request.user
-    #     send_mail(
-    #         subject='Отклик на объявление',
-    #         message=f'Пользователь {feedback.user.username} оставил отклик на объявление {feedback.advert.title}',
-    #         from_email=None,
-    #         recipient_list=[feedback.advert.author.email],
-    #     )
-    #
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        feedback = form.save(commit=False)
+        feedback.user = self.request.user
+        return super().form_valid(form)
 
 
 def feedback_confirm(request, pk):
