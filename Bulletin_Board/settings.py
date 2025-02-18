@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.yandex',
+    'django_apscheduler',
     'Build_Board',
     'tinymce',
 
@@ -195,8 +196,8 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 30
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
 
 # Рассылка Email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
