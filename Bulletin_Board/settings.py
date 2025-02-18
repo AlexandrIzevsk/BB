@@ -214,3 +214,7 @@ SERVER_EMAIL = 'sasha-sarov-333@yandex.ru'
 EMAIL_ADMIN = 'sasha-sarov-333@yandex.ru'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'
+
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
