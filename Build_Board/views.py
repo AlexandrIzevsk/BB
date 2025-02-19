@@ -19,7 +19,6 @@ class AdvertList(ListView):
 
 
 class OneAdvertDetail(DetailView):
-    # model = Post
     queryset = Advert.objects.all()
     template_name = 'one_advert.html'
     context_object_name = 'advert'
@@ -39,11 +38,8 @@ class AdvertCreate(LoginRequiredMixin,CreateView):
 
 class AdvertUpdate(UserPassesTestMixin, UpdateView):
     permission_required = ('Build_Board.change_post',)
-    # Указываем нашу разработанную форму
     form_class = PostForm
-    # модель товаров
     model = Advert
-    # и новый шаблон, в котором используется форма.
     template_name = 'advert_edit.html'
 
     def test_func(self):

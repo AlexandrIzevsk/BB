@@ -1,9 +1,6 @@
-from django.contrib.sessions.models import Session
 from django import forms
-# from tinymce import TinyMCE
-from django.contrib.auth.models import User
 from tinymce.widgets import TinyMCE
-from .models import Advert, Feedback #Customer,
+from .models import Advert, Feedback
 
 
 class TinyMCEWidget(TinyMCE):
