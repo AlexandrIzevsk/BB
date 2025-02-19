@@ -1,43 +1,27 @@
 {% extends 'flatpages/default.html' %}
-<!--{% load i18n %}-->
 
-<!--{% load tz %}-->
-
-
-<!-- Название у нас будет news -->
 {% block title %}
 Adverts
 {% endblock title %}
 
-<!-- В контенте на странице мы выводим все товары -->
 {% block content %}
-<!--     {% get_current_timezone as TIME_ZONE %}-->
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.media }}
         {{ form.as_p }}
-
-<!--        <label for="timezone">Time zone:</label>-->
-<!--        <select name="timezone">-->
-<!--            {% for tz in timezones %}-->
-<!--            <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>-->
-<!--            {% endfor %}-->
-<!--        </select>-->
-<!--        <input type="submit" value="Set">-->
     </form>
-
-<!--    {{ TIME_ZONE }}-->
-<!--    {{ current_time|timezone:TIME_ZONE }} &lt;!&ndash; Отображаем время в выбранном часовом поясе  &ndash;&gt;-->
-
-    <h1>{% trans "All adverts" %} ({{ adverts|length }})</h1>
+    <button><a style=" text-decoration:none; color:black" href="{% url 'profil_user' %}">Приватная страничка</a> </button>
+    <h1>All adverts ({{ adverts|length }})</h1>
+    <button><a style=" text-decoration:none; color:black" href="{% url 'advert_edit' %}">Создать объявление</a> </button>
 
     {% for single_advert in adverts %}
         <hr>
-        <a href="{{ link }}{{ single_advert.get_absolute_url }}"><h2>{{ single_advert.title }}</h2></a>
+        <a style=" text-decoration:none; color:black" href="{{ link }}{{ single_advert.get_absolute_url }}"><h2>{{ single_advert.title }}</h2></a>
         <h6>{{ single_advert.time_in|date:'d M Y' }}</h6>
         <h3>{{ single_advert.content|safe }}</h3>
         {{ form.media }}
+        {% if not single_advert.author == request.user  %}
+            <button><a style=" text-decoration:none; color:black" href="{% url 'feedback_edit' single_advert.id %}">Оставить отклик</a> </button>
+        {% endif %}
     {% endfor %}
-
-
 {% endblock content %}

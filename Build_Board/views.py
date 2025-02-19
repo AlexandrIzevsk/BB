@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .filters import FeedbackFilter
 from django.shortcuts import redirect
 from django.core.mail import send_mail
-# from django.conf.settings import DEFAULT_FROM_EMAIL
+from django.urls import reverse_lazy
 from .forms import PostForm, FeedbackForm
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView
@@ -29,6 +29,7 @@ class AdvertCreate(LoginRequiredMixin,CreateView):
     model = Advert
     form_class = PostForm
     template_name = 'advert_edit.html'
+    success_url = reverse_lazy('adverts')
 
     def form_valid(self, form):
         advert = form.save(commit=False)
@@ -49,16 +50,15 @@ class AdvertUpdate(UserPassesTestMixin, UpdateView):
         item = self.get_object()
         return item.author == self.request.user
 
-    # def form_valid(self, form):
-    #     news = form.save(commit=False)
-    #     news.choice = 'NS'
-    #     return super().form_valid(form)
-
 
 class FeedbackCreate(CreateView):
     model = Feedback
     form_class = FeedbackForm
     template_name = 'feedback_edit.html'
+    success_url = reverse_lazy('adverts')
+
+    def get_initial(self):
+        return dict(advert=self.kwargs.get("pk"))
 
     def form_valid(self, form):
         feedback = form.save(commit=False)

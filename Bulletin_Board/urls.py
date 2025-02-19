@@ -26,5 +26,5 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('adverts/', include('Build_Board.urls')),
-    path('feedback', FeedbackCreate.as_view(), name='feedback_edit'),
+    path('feedback/<int:pk>/', FeedbackCreate.as_view(), name='feedback_edit'),
 ]
