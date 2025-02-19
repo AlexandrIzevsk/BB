@@ -201,17 +201,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "sasha-sarov-333@yandex.ru"
+EMAIL_HOST_USER = "example@yandex.ru"
 EMAIL_HOST_PASSWORD = "rgwlstqbryauosor"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-# EMAIL_TIMEOUT = 60
 
-DEFAULT_FROM_EMAIL = "sasha-sarov-333@yandex.ru"
+DEFAULT_FROM_EMAIL = "example@yandex.ru"
 
-SERVER_EMAIL = 'sasha-sarov-333@yandex.ru'
+SERVER_EMAIL = 'example@yandex.ru'
 
-EMAIL_ADMIN = 'sasha-sarov-333@yandex.ru'
+EMAIL_ADMIN = 'example@yandex.ru'
 
 INTERNAL_IPS = ['127.0.0.1']
 
