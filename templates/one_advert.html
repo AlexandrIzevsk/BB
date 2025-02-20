@@ -11,4 +11,16 @@ OneAdvert
     <h3>{{ advert.title }}</h3>
     <h4>"{{ advert.content|safe }}"</h4>
     <h6>{{ advert.time_in|date:'d M Y' }}</h6>
+    <hr>
+    {% for feed in advert.advert_feedback.all %}
+
+            {% if feed.accept %}
+            <h6>Отклик принят</h6>
+            <p><h3>"{{ feed.text }}"</h3>
+            {% else %}
+            <h6>Отклик не отвечен</h6>
+            <p><h3>"{{ feed.text }}"</h3>
+            {% endif %}
+        </p>
+    {% endfor %}
 {% endblock content %}

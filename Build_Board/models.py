@@ -48,7 +48,7 @@ class Advert(models.Model):
 
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    advert = models.ForeignKey(Advert, on_delete=models.CASCADE)
+    advert = models.ForeignKey(Advert, on_delete=models.CASCADE, related_name='advert_feedback')
     time_in = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     accept = models.BooleanField(default=False)

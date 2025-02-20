@@ -54,12 +54,11 @@ class FeedbackCreate(CreateView):
     queryset = Advert.objects.all()
     success_url = reverse_lazy('adverts')
 
-    def get_initial(self):
-        return dict(advert=self.kwargs.get('pk'))
 
     def form_valid(self, form):
         feedback = form.save(commit=False)
         feedback.user = self.request.user
+        feedback.advert_id = self.kwargs.get('pk')
         return super().form_valid(form)
 
 
